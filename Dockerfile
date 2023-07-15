@@ -12,6 +12,11 @@ RUN apt-get update && apt-get install -y \
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+RUN apt update -y
+RUN apt install nodejs -y
+RUN npm install -g npm@latest
+
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd

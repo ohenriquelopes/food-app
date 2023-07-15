@@ -21,6 +21,26 @@ deploy-stagging:
 	docker-compose up -d app
 	make composer
 	make migrate
+make-controller:
+	@docker exec -i laravel php artisan make:controller
+	make permission
+make-model:
+	@docker exec -i laravel php artisan make:model
+	make permission
+make-migration:
+	@docker exec -i laravel php artisan make:migration
+	make permission
+make-seed:
+	@docker exec -i laravel php artisan make:seeder
+	make permission
+mix-dev:
+	@docker exec laravel npm install
+	@docker exec laravel npm run dev
+mix-prod:
+	@docker exec laravel npm install
+	@docker exec laravel npm run prod
+permission:
+	@docker exec laravel chmod 777 -R .
 down:
 	@docker-compose down -v	
 migrate:
